@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HTML Form with CAPTCHA</title>
+  <style>
+    .captcha-container {
+      display: flex;
+      align-items: center;
+    }
+    .captcha-image {
+      margin-right: 10px;
+    }
+  </style>
+  <script>
+    // Function to generate a random CAPTCHA code
+    function generateCaptcha() {
+      var captcha = '';
+      var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      for (var i = 0; i < 6; i++) {
+        captcha += characters.charAt(Math.floor(Math.random() * characters.length));
+      }
+      document.getElementById('captcha').textContent = captcha;
+    }
+
+    // Function to validate the CAPTCHA input
+    function validateCaptcha() {
+      var input = document.getElementById('captcha-input').value;
+      var captcha = document.getElementById('captcha').textContent;
+
+      if (input.toLowerCase() === captcha.toLowerCase()) {
+        alert('CAPTCHA validation passed!');
+        // Add your form submission code here
+      } else {
+        alert('CAPTCHA validation failed! Please try again.');
+        generateCaptcha();
+      }
+    }
+  </script>
+</head>
+<body>
+  <h2>HTML Form with CAPTCHA</h2>
+  
+  <form>
+    <div class="captcha-container">
+      <img class="captcha-image" src="captcha-image.jpg" alt="CAPTCHA Image">
+      <button type="button" onclick="generateCaptcha()">Generate New CAPTCHA</button>
+    </div>
+    <p id="captcha"></p>
+    <input type="text" id="captcha-input" placeholder="Enter CAPTCHA code">
+    <button type="button" onclick="validateCaptcha()">Submit</button>
+  </form>
+</body>
+</html>
